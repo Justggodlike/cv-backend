@@ -39,13 +39,12 @@ public class AuthController {
             String email = authBody.getEmail();
             User user = userService.findUserByEmail(email);
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, authBody.getPassword()));
-            SecurityContextHolder
-                    .getContext()
-                    .setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             String token = jwtTokenProvider.createToken(email, user.getRoles());
             Map<Object, Object> model = new HashMap<>();
             model.put("username", email);
             model.put("token", token);
+            userService.setUser(user);
             return ok(model);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid email/password supplied");
@@ -55,6 +54,11 @@ public class AuthController {
     @PostMapping("/register")
     public User register(@RequestBody UserCreateDto userCreateDto) {
         return userService.createUser(userCreateDto);
+    }
+
+    @PostMapping("/logout")
+    public void logout() {
+        userService.setUser(null);
     }
 
 }

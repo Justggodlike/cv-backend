@@ -1,7 +1,6 @@
 package com.epam.cv.controller;
 
 import com.epam.cv.dto.FileDto;
-import com.epam.cv.dto.MessageDto;
 import com.epam.cv.entity.User;
 import com.epam.cv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +31,8 @@ public class UserController {
 
     @CrossOrigin
     @PostMapping("/user/uploadFile")
-    public String uploadFile() throws IOException {
-        return userService.saveFile();
+    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        return userService.saveFile(file);
     }
 
     @CrossOrigin

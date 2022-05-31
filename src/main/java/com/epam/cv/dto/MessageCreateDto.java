@@ -4,16 +4,15 @@ import com.epam.cv.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.bson.types.Binary;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 @Getter
 @Setter
 @Builder
-public class MessageDto {
+public class MessageCreateDto {
 
+    private User userTo;
     private String title;
     private String desc;
+    private String filename;
 
 }

@@ -44,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().disable().csrf().disable().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/login").permitAll().antMatchers("/register").permitAll()
 				.antMatchers("/**").permitAll()
+//				.antMatchers("/login").permitAll().antMatchers("/register").permitAll()
 //				.antMatchers("/swagger-ui/**").permitAll()
 //				.antMatchers("/user/me").permitAll()
 //				.antMatchers("/**").hasAuthority("USER")
@@ -85,23 +85,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public UserDetailsService mongoUserDetails() {
 		return new UserDetailsServiceImpl();
-	}
-
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowCredentials(true);
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000/"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-		configuration.setAllowedHeaders(Arrays.asList("X-Requested-With","Origin","Content-Type","Accept","Authorization"));
-
-		// This allow us to expose the headers
-		configuration.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " +
-				"Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
-
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
 	}
 }
