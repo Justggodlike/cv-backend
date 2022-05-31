@@ -3,6 +3,7 @@ package com.epam.cv.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -25,6 +26,7 @@ public class Message {
     private User userTo;
     private String title;
     private String desc;
-    private String fileId;
+    private byte[] file;
+    private String filename;
 
 }
