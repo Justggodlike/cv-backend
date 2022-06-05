@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VacancyService {
 
-    Vacancy findVacancyById(String Id);
+    Vacancy getVacancyById(String id);
 
     Vacancy createVacancy(VacancyCreateDto vacancyCreateDto);
 

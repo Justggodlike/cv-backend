@@ -20,6 +20,7 @@ import java.util.Map;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AuthController {
 
@@ -32,6 +33,7 @@ public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @CrossOrigin
     @SuppressWarnings("rawtypes")
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthBody authBody) {
@@ -51,11 +53,13 @@ public class AuthController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/register")
     public User register(@RequestBody UserCreateDto userCreateDto) {
         return userService.createUser(userCreateDto);
     }
 
+    @CrossOrigin
     @PostMapping("/logout")
     public void logout() {
         userService.setUser(null);

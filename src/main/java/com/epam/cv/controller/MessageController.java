@@ -28,9 +28,11 @@ public class MessageController {
         return messageService.getOutgoingMessages();
     }
 
-    @PutMapping("/messages/create")
-    public Message createMessage(@RequestBody MessageCreateDto messageCreateDto,
-                                 @RequestParam("file") MultipartFile file) throws IOException {
-        return messageService.createMessage(messageCreateDto, file);
+    @PostMapping("/message/create")
+    public Message createMessage(@RequestParam("id") String id,
+                                 @RequestParam("title") String title,
+                                 @RequestParam("desc") String desc,
+                                 @RequestParam(name = "file", required = false) MultipartFile file) throws IOException {
+        return messageService.createMessage(MessageCreateDto.builder().id(id).desc(desc).title(title).build(), file);
     }
 }

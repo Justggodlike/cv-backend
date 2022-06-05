@@ -10,9 +10,8 @@ import lombok.Setter;
 @Builder
 public class MessageCreateDto {
 
-    private User userTo;
+    private String id;
     private String title;
     private String desc;
-    private String filename;
 
 }

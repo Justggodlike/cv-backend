@@ -6,6 +6,8 @@ import com.epam.cv.entity.User;
 import com.epam.cv.repository.MessageRepository;
 import com.epam.cv.service.MessageService;
 import com.epam.cv.service.UserService;
+import com.epam.cv.service.VacancyService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -25,6 +28,9 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    VacancyService vacancyService;
+
     @Override
     public Message findMessageById(String Id) {
         return null;
@@ -35,10 +41,10 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.save(Message.builder()
                 .desc(messageCreateDto.getDesc())
                 .title(messageCreateDto.getTitle())
-                .userTo(messageCreateDto.getUserTo())
+                .userTo(vacancyService.getVacancyById(messageCreateDto.getId()).getUser())
                 .userFrom(userService.getCurrentUser())
-                .file(file.getBytes())
-                .filename(file.getOriginalFilename())
+                .file(Objects.isNull(file) ? null : file.getBytes())
+                .filename(Objects.isNull(file) ? Strings.EMPTY : file.getOriginalFilename())
                 .build());
     }
 
