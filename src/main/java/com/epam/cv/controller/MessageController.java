@@ -3,6 +3,7 @@ package com.epam.cv.controller;
 import com.epam.cv.dto.MessageCreateDto;
 import com.epam.cv.entity.AuthBody;
 import com.epam.cv.entity.Message;
+import com.epam.cv.entity.Vacancy;
 import com.epam.cv.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,4 +36,11 @@ public class MessageController {
                                  @RequestParam(name = "file", required = false) MultipartFile file) throws IOException {
         return messageService.createMessage(MessageCreateDto.builder().id(id).desc(desc).title(title).build(), file);
     }
+
+    @CrossOrigin
+    @GetMapping("/message/{id}")
+    public Message getMessage(@PathVariable String id) {
+        return messageService.findMessageById(id);
+    }
+
 }

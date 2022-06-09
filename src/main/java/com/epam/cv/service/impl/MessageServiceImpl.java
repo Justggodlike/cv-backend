@@ -32,8 +32,8 @@ public class MessageServiceImpl implements MessageService {
     VacancyService vacancyService;
 
     @Override
-    public Message findMessageById(String Id) {
-        return null;
+    public Message findMessageById(String id) {
+        return messageRepository.findById(id).get();
     }
 
     @Override
@@ -57,8 +57,6 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> getOutgoingMessages() {
         User userFrom = userService.getCurrentUser();
-        List<Message> nado = messageRepository.findByUserFrom(userFrom);
-        List<Message> all = messageRepository.findAll();
         return messageRepository.findByUserFrom(userFrom);
     }
 }
