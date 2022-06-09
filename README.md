@@ -1,9 +1,10 @@
-###Mongo setup:
+### Mongo setup:
 
 Get Mongo: https://www.mongodb.com/try/download/community  
 
-###Mongo start up
-
+### Mongo start up
+  
+Java v = 8 (JDK1.8)  
 Cmd (admin) - set mongo data path: mongod -dbpath [path]  
 *e.g. on my local machine:*  
 cd C:\Program Files\MongoDB\Server\5.0\bin\data  
@@ -14,7 +15,7 @@ Cmd (admin) - start mongo server: [path]/mongo.exe
 cd C:\Program Files\MongoDB\Server\5.0\bin  
 mongo.exe  
 
-###Start application server (8080)  
+### Start application server (8080)  
 
 Build the app from project root folder:  
 ./gradlew build  
